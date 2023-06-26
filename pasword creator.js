@@ -1,40 +1,42 @@
 function generarContrasena() {
-  var longitud = parseInt(document.getElementById('longitud').value);
-  var seguridad = document.getElementById('seguridad').value;
+  var longitud = obtenerLongitud();
+  var nivelSeguridad = obtenerNivelSeguridad();
+  var contrasena = generarContrasenaSegura(longitud, nivelSeguridad);
+  mostrarContrasena(contrasena);
+}
+
+function obtenerLongitud() {
+  var longitudInput = document.getElementById('longitud');
+  return parseInt(longitudInput.value);
+}
+
+function obtenerNivelSeguridad() {
+  var nivelSeguridadInput = document.getElementById('security-level');
+  return nivelSeguridadInput.value;
+}
+
+function generarContrasenaSegura(longitud, nivelSeguridad) {
   var caracteres = '';
-
-  if (seguridad === 'baja') {
-    caracteres = 'abcdefghijklmnopqrstuvwxyz';
-  } else if (seguridad === 'media') {
+  
+  if (nivelSeguridad === 'low') {
     caracteres = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  } else if (seguridad === 'alta') {
+  } else if (nivelSeguridad === 'medium') {
     caracteres = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  } else if (nivelSeguridad === 'high') {
+    caracteres = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
   }
-
+  
   var contrasena = '';
+  
   for (var i = 0; i < longitud; i++) {
     var indice = Math.floor(Math.random() * caracteres.length);
     contrasena += caracteres.charAt(indice);
   }
-
-  document.getElementById('password').value = contrasena;
+  
+  return contrasena;
 }
 
-function mostrarNivelSeguridad() {
-  var seguridad = document.getElementById('seguridad').value;
-  var nivelSeguridad = document.getElementById('nivel-seguridad');
-
-  if (seguridad === 'baja') {
-    nivelSeguridad.innerText = 'Nivel de seguridad: Baja';
-    nivelSeguridad.style.color = '#FF4136';
-  } else if (seguridad === 'media') {
-    nivelSeguridad.innerText = 'Nivel de seguridad: Media';
-    nivelSeguridad.style.color = '#FF851B';
-  } else if (seguridad === 'alta') {
-    nivelSeguridad.innerText = 'Nivel de seguridad: Alta';
-    nivelSeguridad.style.color = '#2ECC40';
-  }
+function mostrarContrasena(contrasena) {
+  var passwordInput = document.getElementById('password');
+  passwordInput.value = contrasena;
 }
-
-// Event listener para el cambio de seguridad
-document.getElementById('seguridad').addEventListener('change', mostrarNivelSeguridad);
