@@ -1,47 +1,40 @@
-// Función para generar una contraseña de alta seguridad
 function generarContrasena() {
-  // Caracteres permitidos en la contraseña
-  const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+~`|}{[]\:;?><,./-=';
-  
-  // Obtener el nivel de seguridad seleccionado
-  const selectElement = document.getElementById('security-select');
-  const nivelSeguridad = selectElement.value;
-  
-  let longitud;
-  
-  // Determinar la longitud de la contraseña según el nivel de seguridad
-  if (nivelSeguridad === 'low') {
-    longitud = 8;
-  } else if (nivelSeguridad === 'medium') {
-    longitud = 12;
-  } else {
-    longitud = 16;
+  var longitud = parseInt(document.getElementById('longitud').value);
+  var seguridad = document.getElementById('seguridad').value;
+  var caracteres = '';
+
+  if (seguridad === 'baja') {
+    caracteres = 'abcdefghijklmnopqrstuvwxyz';
+  } else if (seguridad === 'media') {
+    caracteres = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  } else if (seguridad === 'alta') {
+    caracteres = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   }
-  
-  let contrasena = '';
-  
-  // Generar la contraseña
-  for (let i = 0; i < longitud; i++) {
-    const index = Math.floor(Math.random() * caracteres.length);
-    contrasena += caracteres[index];
+
+  var contrasena = '';
+  for (var i = 0; i < longitud; i++) {
+    var indice = Math.floor(Math.random() * caracteres.length);
+    contrasena += caracteres.charAt(indice);
   }
-  
-  // Mostrar la contraseña generada en el campo de texto
-  document.getElementById('password').value = contrasena;
+
+  document.getElementById('password').value = contraseña;
 }
 
-// Obtener referencia al elemento de la ventana emergente
-const popup = document.getElementById('popup');
+function mostrarNivelSeguridad() {
+  var seguridad = document.getElementById('seguridad').value;
+  var nivelSeguridad = document.getElementById('nivel-seguridad');
 
-// Función para mostrar la ventana emergente
-function mostrarPopup() {
-  popup.style.display = 'flex';
+  if (seguridad === 'baja') {
+    nivelSeguridad.innerText = 'Nivel de seguridad: Baja';
+    nivelSeguridad.style.color = '#FF4136';
+  } else if (seguridad === 'media') {
+    nivelSeguridad.innerText = 'Nivel de seguridad: Media';
+    nivelSeguridad.style.color = '#FF851B';
+  } else if (seguridad === 'alta') {
+    nivelSeguridad.innerText = 'Nivel de seguridad: Alta';
+    nivelSeguridad.style.color = '#2ECC40';
+  }
 }
 
-// Función para cerrar la ventana emergente
-function cerrarPopup() {
-  popup.style.display = 'none';
-}
-
-// Mostrar la ventana emergente al cargar la página
-window.addEventListener('load', mostrarPopup);
+// Event listener para el cambio de seguridad
+document.getElementById('seguridad').addEventListener('change', mostrarNivelSeguridad);
