@@ -17,7 +17,7 @@ function generarContrasena() {
     contrasena += caracteres.charAt(indice);
   }
 
-  document.getElementById('password').value = contraseña;
+  document.getElementById('password').value = contrasena;
 }
 
 function mostrarNivelSeguridad() {
