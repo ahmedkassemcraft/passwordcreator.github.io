@@ -2,8 +2,21 @@
 function generarContrasena() {
   // Caracteres permitidos en la contraseña
   const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+~`|}{[]\:;?><,./-=';
-  // Longitud de la contraseña
-  const longitud = 16;
+  
+  // Obtener el nivel de seguridad seleccionado
+  const selectElement = document.getElementById('security-select');
+  const nivelSeguridad = selectElement.value;
+  
+  let longitud;
+  
+  // Determinar la longitud de la contraseña según el nivel de seguridad
+  if (nivelSeguridad === 'low') {
+    longitud = 8;
+  } else if (nivelSeguridad === 'medium') {
+    longitud = 12;
+  } else {
+    longitud = 16;
+  }
   
   let contrasena = '';
   
