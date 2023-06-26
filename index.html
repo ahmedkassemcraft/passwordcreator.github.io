@@ -17,6 +17,12 @@
       <div class="section-content">
         <p>Haz clic en el botón para generar una contraseña de alta seguridad:</p>
         <input type="text" id="password" class="input" readonly>
+        <label for="security-level">Nivel de Seguridad:</label>
+        <select id="security-level" class="select">
+          <option value="low">Bajo</option>
+          <option value="medium">Medio</option>
+          <option value="high">Alto</option>
+        </select>
         <button onclick="generarContrasena()" class="button">Generar Contraseña</button>
       </div>
     </div>
